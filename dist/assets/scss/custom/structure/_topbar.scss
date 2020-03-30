@@ -5,7 +5,7 @@
 // Logo
 .logo {
     display: block;
-    line-height: $topbar-height;
+    line-height: 38px !important;
     span.logo-lg {
         display: block;
     }
@@ -33,7 +33,7 @@
 
 .navbar-custom {
     background-color: $bg-topbar-dark;
-    box-shadow: $shadow;
+    box-shadow: 0 2px 10px #444444;
     position: fixed;
     left: 0;
     right: 0;

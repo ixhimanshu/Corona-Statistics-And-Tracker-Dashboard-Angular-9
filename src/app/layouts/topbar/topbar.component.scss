@@ -1,0 +1,40 @@
+.logo-lg{
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.navbar-custom{
+    margin-bottom: 2rem;
+    background: white;
+}
+
+.metacoronavirus{
+    margin-left: 1rem;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.items-wrapper{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    .item{
+        padding: 8px;
+    }
+}
+
+.flexbox{
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    line-height: 38px !important;
+
+}
+
+.navbar-custom {
+    box-shadow: 0 1px 7px #757575;
+}
