@@ -1,67 +1,5 @@
 <div class="container-fluid">
-  <div *ngIf="isModalShown" [config]="{ show: true }" (onHidden)="onHidden()" bsModal #autoShownModal="bs-modal"
-    class="modal fade d-block" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body text-center pt-4">
-
-          <div *ngIf="modalStep == 1" class="modal-step" [@fadeInOutAnimation]>
-            <img src="assets/images/step-1.png" width="125">
-            <h5 class="text-white mt-3">KNOW HOW IT <span class="text-blue">SPREADS</span></h5>
-            <h6 class="text-white">There is currently No Vaccine to prevent <span class="text-danger">COVID-19</span>
-            </h6>
-            <p>The virus is thought to spread mainly from person-to-person contact
-              through respiratory droplets produced when an infected person coughs or sneezes.</p>
-          </div>
-          <div *ngIf="modalStep == 2" class="modal-step" [@fadeInOutAnimation]>
-            <img src="assets/images/step-2.png" width="125">
-            <h5 class="text-white mt-3">TAKE STEPS TO <span class="text-blue">PROTECT YOURSELF</span></h5>
-            <p>Frequently Wash your hands with soap and water for at least 20 seconds. Always Carry a hand sanitizer
-              that contains at least 60% alcohol.
-              Avoid touching your eyes, nose, and mouth with unwashed hands.</p>
-          </div>
-          <div *ngIf="modalStep == 3" class="modal-step" [@fadeInOutAnimation]>
-            <img src="assets/images/step-3.png" width="125">
-            <h5 class="text-white mt-3">AVOID <span class="text-blue">CLOSE CONTACT</span></h5>
-            <p>Avoid close contact with people who are sick. Put distance between yourself and other people if
-              COVID-19/Coronavirus is spreading in your community.</p>
-
-          </div>
-          <div *ngIf="modalStep == 4" class="modal-step" [@fadeInOutAnimation]>
-            <img src="assets/images/step-4.png" width="125">
-            <h5 class="text-white mt-3">TAKE STEPS TO <span class="text-blue">PROTECT YOURSELF</span></h5>
-            <p>
-              Cover your mouth and nose with a tissue when you cough or sneeze or use the inside of your elbow.
-              Immediately wash your hands with soap and water for at least 20 seconds or clean your hands with a
-              hand sanitizer that contains at least 60% alcohol.
-            </p>
-          </div>
-          <div *ngIf="modalStep == 5" class="modal-step" [@fadeInOutAnimation]>
-            <img src="assets/images/step-5.png" width="125">
-            <h5 class="text-white mt-3">CLEAN & <span class="text-blue">DISINFECT</span></h5>
-            <p>
-              Clean & disinfect frequently touched surfaces daily. This includes tables, doorknobs, light switches,
-              countertops, handles, desks, phones, keyboards, toilets, faucets, and sinks.
-              If surfaces are dirty, clean them: Use detergent or soap and water prior to disinfection.
-            </p>
-          </div>
-          <div class="col-12 text-center" *ngIf="modalStep!=5">
-            <button (click)="nextStep()" class="btn btn-secondary waves-effect waves-light mb-4"><span>Next
-              </span><i class="fa fa-arrow-right mr-1"></i></button>
-          </div>
-          <div class="col-12 text-center" *ngIf="modalStep==5">
-            <div class="form-group">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="forDontShow" #dontShow>
-                <label class="custom-control-label" for="forDontShow">Don't Show again</label>
-              </div>
-            </div>
-            <button (click)="close(dontShow.checked)" class="btn btn-blue waves-effect waves-light mb-4"><i class="fas fa-times-circle mr-1"></i><span> Close</span></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
   <div class="row">
     <div class="col-xl-3 col-md-6 col-6">
       <div class="card-box">
@@ -382,18 +320,16 @@
         <h5>Share with your friends, family or coworkers.</h5>
         <p>Keep them up to date with the coronavirus outbreak.</p>
         <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
-          href="https://www.facebook.com/sharer/sharer.php?u=https://coronastatistics.live"> <i
+          href="https://www.facebook.com/sharer/sharer.php?u=https://metacoronavirus.com"> <i
             class="fab fa-facebook"></i> </a>
         <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
-          href="https://twitter.com/intent/tweet?url=https://coronastatistics.live&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker">
+          href="https://twitter.com/intent/tweet?url=https://metacoronavirus.com&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker">
           <i class="fab fa-twitter"></i> </a>
         <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
-          href="https://vk.com/share.php?url=https://coronastatistics.live"> <i class="fab fa-vk"></i> </a>
+          href="https://vk.com/share.php?url=https://metacoronavirus.com"> <i class="fab fa-vk"></i> </a>
         <a class="btn btn-icon waves-effect btn-blue"
-          href="whatsapp://send?text=Coronavirus live statistics and tracker https://coronastatistics.live"
+          href="whatsapp://send?text=Coronavirus live statistics and tracker https://metacoronavirus.com"
           data-action="share/whatsapp/share"> <i class="fab fa-whatsapp"></i> </a>
-        <a href="https://ko-fi.com/ossamarafique" class="btn btn- waves-effect btn-danger d-block mt-1 mx-auto"> <i
-            class="fas fa-coffee"></i> Buy me a coffee </a>
       </div>
     </div><!-- end col -->
 
