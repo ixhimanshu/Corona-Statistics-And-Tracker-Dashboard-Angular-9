@@ -6,19 +6,19 @@
       <a routerLink="/" class="logo text-center">
         <span class="logo-lg">
           <div class="flexbox">
-            <img src="assets/icons/virus.png" alt="" height="40">
+            <img src="assets/icons/virus.png" alt="" height="30">
             <h3 class="metacoronavirus">metacoronavirus</h3>
           </div>
 
           <div class="menu-items">
 
-            <ul class="items-wrapper">
-              <!-- <li class="item">News</li> -->
+            <ul *ngIf="showCountryFlag" class="items-wrapper" (click)="findRoute()">
+              <img [src]="getImagePath()">
             </ul>
 
           </div>
-          
-          
+
+
         </span>
         <!-- <span class="logo-sm">
           <div class="d-flex">
@@ -44,4 +44,3 @@
   </div>
 </div>
 <!-- end Topbar -->
-

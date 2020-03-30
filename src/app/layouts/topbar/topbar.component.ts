@@ -1,11 +1,17 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
-  constructor() { }
+  showCountryFlag: boolean;
+  userCountry: any;
+  userCountryData: any;
+  constructor(private route: Router) {
+    this.checkCountry();
+   }
 
   deferredPrompt: any;
   showButton = false;
@@ -35,4 +41,28 @@ export class TopbarComponent {
   });
   
 }
+
+checkCountry(){
+  fetch('http://ip-api.com/json')
+  .then((res:any) => res.json() )
+  .then(data => {
+    console.log(data);
+    if(data.country) {
+      this.showCountryFlag = true;
+      this.userCountryData = data;
+    }
+  })
+}
+
+getImagePath(){
+  return `https://www.countryflags.io/${this.userCountryData.countryCode}/flat/32.png`
+}
+
+findRoute() {
+  setTimeout(() => {
+    this.route.navigate([`/country/${this.userCountryData.country}`]);
+  }, 200)
+}
+
+
 }
