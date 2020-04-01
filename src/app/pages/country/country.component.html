@@ -18,7 +18,7 @@
           <div class="topBoxesDetails text-md-right text-center" [class.d-none]="isLoading">
 
             <span class="badge badge-blue badge-pill float-md-left m-md-3 mt-2">
-              {{(todayCases / finishedCases * 100) | number:'.1-2'}}%
+              {{(todayCases / totalCases * 100) | number:'.1-2'}}%
               <i class="mdi mdi-trending-up"></i>
             </span>
             <h2 class="font-weight-normal"> {{totalCases | number}} </h2>
@@ -44,7 +44,7 @@
           </div>
           <div class="topBoxesDetails text-md-right text-center" [class.d-none]="isLoading">
             <span
-              class="badge badge-danger badge-pill float-md-left m-md-3 mt-2">{{(totalDeaths / finishedCases * 100) | number:'.1-2'}}%
+              class="badge badge-danger badge-pill float-md-left m-md-3 mt-2">{{(totalDeaths / totalCases * 100) | number:'.1-2'}}%
               <i class="mdi mdi-trending-up"></i> </span>
             <h2 class="font-weight-normal"> {{totalDeaths | number}} </h2>
             <p class="text-muted">{{todayDeaths}} today</p>
@@ -69,7 +69,7 @@
           </div>
           <div class="topBoxesDetails text-md-right text-center" [class.d-none]="isLoading">
             <span
-              class="badge badge-success badge-pill float-md-left m-md-3 mt-2">{{(totalRecoveries / finishedCases * 100) | number:'.1-2'}}%
+              class="badge badge-success badge-pill float-md-left m-md-3 mt-2">{{(totalRecoveries / totalCases * 100) | number:'.1-2'}}%
               <i class="mdi mdi-trending-up"></i> </span>
             <h2 class="font-weight-normal"> {{totalRecoveries | number}} </h2>
             <p class="text-muted">{{activeCases | number}} remaining</p>
@@ -112,7 +112,7 @@
 
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-xl-4">
       <div class="card-box">
         <h4 class="header-title mb-3">Rate Distribution </h4>
@@ -125,7 +125,9 @@
 
         </div>
       </div>
-    </div><!-- end col -->
+    </div>
+    
+    
 
     <div class="col-xl-8">
       <div class="card-box">
@@ -137,13 +139,14 @@
           <div id="lineChart" style="width: 100%; height: 400px; overflow: hidden"></div>
         </div>
       </div>
-    </div><!-- end col -->
+    </div>
+    
 
-  </div>
+  </div> -->
 
 
   <div class="row">
-    <div class="col-xl-4">
+    <!-- <div class="col-xl-4">
       <div class="card-box">
         <h4 class="header-title mb-3" *ngIf="country">
 {{country.country}}'s Cases Distribution
@@ -157,7 +160,7 @@
 
         </div>
       </div>
-    </div><!-- end col -->
+    </div> -->
 
     <div class="col-xl-5">
       <div class="card-box">
@@ -233,11 +236,11 @@
       <div class="card-box text-center">
 
         <h5>Share with your friends, family or coworkers.</h5>
-        <p>Keep them up to date with the coronavirus outbreak.</p>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://coronastatistics.live"> <i class="fab fa-facebook"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://twitter.com/intent/tweet?url=https://coronastatistics.live&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker"> <i class="fab fa-twitter"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://vk.com/share.php?url=https://coronastatistics.live"> <i class="fab fa-vk"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue" href="whatsapp://send?text=Coronavirus live statistics and tracker https://coronastatistics.live" data-action="share/whatsapp/share"> <i class="fab fa-whatsapp"></i> </a>
+        <p>To keep them up to date with the coronavirus outbreak.</p>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://metacoronavirus.com"> <i class="fab fa-facebook"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://twitter.com/intent/tweet?url=https://metacoronavirus.com&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker"> <i class="fab fa-twitter"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://vk.com/share.php?url=https://metacoronavirus.com"> <i class="fab fa-vk"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue" href="whatsapp://send?text=Coronavirus live statistics and tracker https://metacoronavirus.com" data-action="share/whatsapp/share"> <i class="fab fa-whatsapp"></i> </a>
       </div>
       <div class="card-box text-center">
 

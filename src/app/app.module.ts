@@ -21,6 +21,9 @@ import { environment } from '../environments/environment';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CountupComponent } from './shared/countup/countup.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BlogComponent } from './pages/blog/blog.component';
+import { IntroductionComponent } from './pages/introduction/introduction.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   };
@@ -31,7 +34,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,TopbarComponent, NavbarComponent, FooterComponent, DashboardComponent, CountryComponent, NotFoundComponent, CountupComponent
+    LayoutComponent,TopbarComponent, NavbarComponent, FooterComponent, DashboardComponent, CountryComponent, NotFoundComponent, CountupComponent, BlogComponent, IntroductionComponent, QuestionsComponent
   ],
   imports: [
     BrowserModule,

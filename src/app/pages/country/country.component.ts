@@ -434,9 +434,6 @@ export class CountryComponent implements OnInit {
           this.casesPer1M = getAllData["casesPerOneMillion"];
           this.finishedCases = this.totalDeaths + this.totalRecoveries;
           this.timeLine = getTimelineData;
-          this.loadPieChart();
-          this.loadLineChart();
-          this.loadRadar();
         });
     });
   }

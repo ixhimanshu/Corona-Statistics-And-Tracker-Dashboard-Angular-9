@@ -1,0 +1,51 @@
+h2{
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.headline{
+    margin-bottom: 1rem;
+    span{
+        display: block;
+        font-size: 20px;
+        color: #f9a632;
+        margin-top: 10px;
+    }
+   
+}
+
+.description{
+    text-align: center;
+    color: #757575 !important;
+}
+
+#myth_model{
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        li{
+            width: 250px;
+            box-shadow: 0 2px 10px #dedede;
+            padding: 15px;
+            border-radius: 10px;
+            list-style: none;
+            text-align: center;
+            color: #444444;
+            margin: 20px;
+            .myth_text{
+                margin-top: 15px;
+            }
+        }
+    }
+}
+
+
+.share-site{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .share-site{
+        display: block !important;
+    }
+}

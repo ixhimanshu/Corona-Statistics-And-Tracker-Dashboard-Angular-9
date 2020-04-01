@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
+
+  isSidebar = false;
   showCountryFlag: boolean;
   userCountry: any;
   userCountryData: any;
@@ -43,26 +45,33 @@ export class TopbarComponent {
 }
 
 checkCountry(){
-  fetch('http://ip-api.com/json')
-  .then((res:any) => res.json() )
-  .then(data => {
-    console.log(data);
-    if(data.country) {
-      this.showCountryFlag = true;
-      this.userCountryData = data;
-    }
-  })
+  if(!this.userCountryData){
+    fetch('https://api.ipgeolocation.io/ipgeo?apiKey=9a6cc34c2f8042faaa3997b8230991d9')
+    .then((res:any) => res.json() )
+    .then(data => {
+      console.log(data);
+      if(data.country_code2) {
+        this.showCountryFlag = true;
+        this.userCountryData = data;
+      }
+    })
+  }
 }
 
 getImagePath(){
-  return `https://www.countryflags.io/${this.userCountryData.countryCode}/flat/32.png`
+  return `https://www.countryflags.io/${this.userCountryData.country_code2}/flat/32.png`
 }
 
 findRoute() {
+  this.isSidebar = !this.isSidebar;
   setTimeout(() => {
-    this.route.navigate([`/country/${this.userCountryData.country}`]);
+    this.route.navigate([`/country/${this.userCountryData.country_name}`]);
   }, 200)
 }
 
+navToHome() {
+  this.route.navigate([`/`]);
+
+}
 
 }
