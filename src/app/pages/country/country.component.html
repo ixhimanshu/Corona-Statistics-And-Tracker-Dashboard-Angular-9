@@ -5,6 +5,11 @@
 
     <h2 class="text-center mt-3 mb-3">
      {{country.country}}'s Statistics</h2>
+     <p class="white">
+         {{country.country}} corona virus live data and stats about total 
+       number of cases, recovered cases and total death. Get all news and updates about COVID19 in {{country.country}}
+    </p>
+
      </div>
    <div class="row">
     <div class="col-xl-3 col-md-6 col-6">
@@ -112,6 +117,277 @@
 
   </div>
 
+
+  <div *ngIf="activeCountryName == 'india'" class="row mt-2">
+    <h2 class="mt-4 mb-4">State Wise Breakdown</h2>
+    <div class="data-table table-responsive">		
+      <table class="table">
+      <thead>
+        <tr>
+        <th><strong>S.No</strong></th>
+        <th><strong>State</strong></th>
+        <th><strong>Cases </strong></th>                              
+        <th><strong>Cured </strong> </th>
+        <th><strong>Death</strong></th>
+        </tr>
+      </thead>	
+      <tbody>
+        <tr>
+        <td>1</td>
+        <td>Andhra Pradesh</td>
+        <td>132</td>
+        <td>1</td>
+        <td>1</td>
+        </tr>
+        
+        <tr>
+        <td>2</td>
+        <td>Andaman and Nicobar Islands</td>
+        <td>10</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        <tr>
+        <td>3</td>
+        <td>Arunachal Pradesh</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>4</td>
+        <td>Assam</td>
+        <td>16</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>5</td>
+        <td>Bihar</td>
+        <td>24</td>
+        <td>0</td>
+        <td>1</td>
+        </tr>
+        
+        <tr>
+        <td>6</td>
+        <td>Chandigarh</td>
+        <td>18</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>7</td>
+        <td>Chhattisgarh</td>
+        <td>9</td>
+        <td>2</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>8</td>
+        <td>Delhi</td>
+        <td>219</td>
+        <td>8</td>
+        <td>4</td>
+        </tr>
+        
+        <tr>
+        <td>9</td>
+        <td>Goa</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>10</td>
+        <td>Gujarat</td>
+        <td>87</td>
+        <td>8</td>
+        <td>7</td>
+        </tr>
+        
+        <tr>
+        <td>11</td>
+        <td>Haryana</td>
+        <td>43</td>
+        <td>21</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>12</td>
+        <td>Himachal Pradesh</td>
+        <td>6</td>
+        <td>1</td>
+        <td>1</td>
+        </tr>
+        
+        <tr>
+        <td>13</td>
+        <td>Jammu and Kashmir</td>
+        <td>70</td>
+        <td>3</td>
+        <td>2</td>
+        </tr>
+        <tr>
+        <td>14</td>
+        <td>Jharkhand</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>15</td>
+        <td>Karnataka</td>
+        <td>124</td>
+        <td>10</td>
+        <td>3</td>
+        </tr>
+        
+        <tr>
+        <td>16</td>
+        <td>Kerala</td>
+        <td>286</td>
+        <td>27</td>
+        <td>2</td>
+        </tr>
+        
+        <tr>
+        <td>17</td>
+        <td>Ladakh</td>
+        <td>14</td>
+        <td>3</td>
+        <td>0</td>
+        </tr>
+      
+        <tr>
+        <td>18</td>
+        <td>Madhya Pradesh</td>
+        <td>99</td>
+        <td>0</td>
+        <td>6</td>
+        </tr>
+        
+        <tr>
+        <td>19</td>
+        <td>Maharashtra</td>
+        <td>335</td>
+        <td>42</td>
+        <td>16</td>
+        </tr>
+        
+        <tr>
+        <td>20</td>
+        <td>Manipur</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>21</td>
+        <td>Mizoram</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+      
+        <tr>
+        <td>22</td>
+        <td>Odisha</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+      
+        <tr>
+        <td>23</td>
+        <td>Puducherry</td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        </tr>
+      
+        <tr>
+        <td>24</td>
+        <td>Punjab</td>
+        <td>46</td>
+        <td>1</td>
+        <td>4</td>
+        </tr>
+        
+        <tr>
+        <td>25</td>
+        <td>Rajasthan</td>
+        <td>133</td>
+        <td>3</td>
+        <td>0</td>
+        </tr>
+      
+        <tr>
+        <td>26</td>
+        <td>Tamil Nadu</td>
+        <td>309</td>
+        <td>6</td>
+        <td>1</td>
+        </tr>
+        
+        <tr>
+        <td>27</td>
+        <td>Telengana</td>
+        <td>107</td>
+        <td>1</td>
+        <td>3</td>
+        </tr>
+        
+        <tr>
+        <td>28</td>
+        <td>Uttarakhand</td>
+        <td>10</td>
+        <td>2</td>
+        <td>0</td>
+        </tr>
+        
+        <tr>
+        <td>28</td>
+        <td>Uttar Pradesh</td>
+        <td>113</td>
+        <td>14</td>
+        <td>2</td>
+        </tr>                    
+        
+        <tr>
+        <td>29</td>
+        <td>West Bengal</td>
+        <td>53</td>
+        <td>3</td>
+        <td>3</td>
+        </tr>
+        
+        <tr>
+        <td colspan="2"><strong>Total number of confirmed cases in India</strong></td>
+        <td><strong>2301*</strong></td>
+        <td>
+        <strong>157</strong>
+        </td>
+        <td>
+        <strong>56</strong>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="5"><strong>*Remaining 18 cases are being assigned to states for contact tracing</strong></td>
+        </tr>
+      </tbody>
+      </table>
+      </div>
+  </div>
+
   <!-- <div class="row">
     <div class="col-xl-4">
       <div class="card-box">
@@ -145,7 +421,7 @@
   </div> -->
 
 
-  <div class="row">
+  <div class="row mt-4">
     <!-- <div class="col-xl-4">
       <div class="card-box">
         <h4 class="header-title mb-3" *ngIf="country">
@@ -176,7 +452,7 @@
                       <i class="fas fa-circle-notch fa-spin m-2 text-blue"></i>
                     </div>
                     <h2 [class.d-none]="isLoading" class="font-weight-normal text-success">
-                      <span *ngIf="finishedCases>0 else naRecovery">{{(totalRecoveries / finishedCases * 100) | number:'.1-2'}}%</span>
+                      <span *ngIf="finishedCases>0 else naRecovery">{{(totalRecoveries / totalCases * 100) | number:'.1-2'}}%</span>
                       <ng-template #naRecovery>
                         <span>N/A</span>
                       </ng-template>
@@ -193,7 +469,7 @@
                       <i class="fas fa-circle-notch fa-spin m-2 text-danger"></i>
                     </div>
                     <h2 [class.d-none]="isLoading" class="font-weight-normal text-danger">
-                      <span *ngIf="finishedCases>0 else naDeath">{{(totalDeaths / finishedCases * 100) | number:'.1-2'}}%</span>
+                      <span *ngIf="finishedCases>0 else naDeath">{{(totalDeaths / totalCases * 100) | number:'.1-2'}}%</span>
                       <ng-template #naDeath>
                         <span>N/A</span>
                       </ng-template>

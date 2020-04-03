@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   public casesPer1M;
   public finishedCases;
 
-  public sortType = "todayCases";
+  public sortType = "cases";
 
   public countryCodes = {
     'Afghanistan': 'AF',
@@ -357,6 +357,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     for (var i = 0, _len = array.length; i < _len; i++) {
       total += array[i][index]
     }
+    
     return total
   }
 
@@ -379,7 +380,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return data
   }
   constructor(private zone: NgZone, private _getDataService: GetdataService) {
-
+    this.generateSitemap();
   }
 
   ngAfterViewInit() {
@@ -402,7 +403,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
 
   async ngOnInit() {
     if(!localStorage.getItem("dontShow")){
@@ -446,6 +446,54 @@ export class DashboardComponent implements OnInit, AfterViewInit {
      });
     });
   }
+
+
+ generateSitemap(){
+  var country_list = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan", "Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
+  // console.log(data);
+  country_list.forEach((e) => {
+      if(e.indexOf(' ') > -1) {
+       console.log(
+        `<url>
+        <loc>https://metacoronavirus.com/country/${e.replace(' ', '%20').toLowerCase()}</loc>
+        <lastmod>2020-03-29T17:13:36+00:00</lastmod>
+        <priority>0.8</priority>
+      </url>`
+       )
+      } else {
+        console.log(
+          `<url>
+            <loc>https://metacoronavirus.com/country/${e.toLowerCase()}</loc>
+            <lastmod>2020-03-29T17:13:36+00:00</lastmod>
+            <priority>0.8</priority>
+          </url>`
+        )
+      }
+      
+  })
+  const template = `<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <url>
+    <loc>https://moviesflux.blogspot.com/</loc>
+    <lastmod>2020-03-29T17:13:36+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  
+  <url>
+    <loc>
+https://moviesflux.blogspot.com/2020/03/go-karts-2020-in-dual-audio-hindi_29.html
+</loc>
+    <lastmod>2020-03-29T17:13:36+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+</urlset>`
+
+
+ 
+}
 
   searchCountries(key) {
     if (key) {

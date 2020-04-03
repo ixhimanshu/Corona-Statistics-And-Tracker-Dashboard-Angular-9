@@ -41,9 +41,11 @@ export class CountryComponent implements OnInit {
   public activeCases=0;
   public casesPer1M=0;
   public finishedCases=0;
+  activeCountryName: string;
 
 
-  constructor(private route: ActivatedRoute, private _getDataService: GetdataService, private zone: NgZone) {}
+  constructor(private route: ActivatedRoute, private _getDataService: GetdataService, private zone: NgZone) {
+  }
 
 
   public countryCodes = {
@@ -345,6 +347,7 @@ export class CountryComponent implements OnInit {
 
   ngOnInit() {
     let nameTimeline = this.route.snapshot.paramMap.get("name").toLowerCase();
+    this.activeCountryName = this.route.snapshot.paramMap.get("name").toLowerCase();
     if (nameTimeline == "usa") {
       nameTimeline = "us";
     } else if(nameTimeline == "taiwan"){
@@ -436,190 +439,12 @@ export class CountryComponent implements OnInit {
           this.timeLine = getTimelineData;
         });
     });
-  }
 
-  loadLineChart() {
-    let caseData = [];
-    if (!this.timeLine.multiple) {
-      caseData = this.timeLine.data.timeline;
-    } else {
-      let data = {};
-      this.timeLine.data.forEach(async element => {
-        element.timeline.forEach(async o => {
-          if(!data.hasOwnProperty(o.date)){
-            data[o.date] = {};
-            data[o.date]["cases"] = 0;
-            data[o.date]["deaths"] = 0;
-            data[o.date]["recovered"] = 0;
-          }
-          data[o.date].cases += parseInt(o.cases);
-          data[o.date].deaths += parseInt(o.deaths);
-          data[o.date].recovered += parseInt(o.recovered);
-        });
-      });
-      Object.keys(data).forEach(key => {
-        caseData.push({
-          date: new Date(key),
-          cases: data[key].cases,
-          recovered: data[key].recovered,
-          deaths: data[key].deaths
-        });
-      });
-    }
-    caseData.push({
-      date: new Date().getTime(),
-      cases: this.totalCases,
-      recovered: this.totalRecoveries,
-      deaths: this.totalDeaths
-    });
-    let chart = am4core.create("lineChart", am4charts.XYChart);
-    chart.numberFormatter.numberFormat = "#a";
-    chart.numberFormatter.bigNumberPrefixes = [
-      { "number": 1e+3, "suffix": "K" },
-      { "number": 1e+6, "suffix": "M" },
-      { "number": 1e+9, "suffix": "B" }
-    ];
-    
-    // Create axes
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.minGridDistance = 50;
-
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    
-    valueAxis.renderer.labels.template.fill = am4core.color("#adb5bd");
-    dateAxis.renderer.labels.template.fill = am4core.color("#adb5bd");
-
-    chart = this.createSeriesLine(chart, "#21AFDD", "cases");
-    chart = this.createSeriesLine(chart, "#10c469", "recovered");
-    chart = this.createSeriesLine(chart, "#ff5b5b", "deaths");
-
-    chart.data = caseData;
-
-    chart.legend = new am4charts.Legend();
-    chart.legend.labels.template.fill = am4core.color("#adb5bd");
-
-    chart.cursor = new am4charts.XYCursor();
-    
-    this.lineChart = chart;
   }
 
 
-  loadRadar() {
-    let chart = am4core.create("radarChart", am4charts.RadarChart);
 
-    // Add data
-    chart.data = [{
-      "category": "Critical",
-      "value": this.totalCritical / this.activeCases * 100,
-      "full": 100
-    }, {
-      "category": "Death",
-      "value": this.totalDeaths / this.finishedCases * 100,
-      "full": 100
-    }, {
-      "category": "Recovered",
-      "value": this.totalRecoveries / this.finishedCases * 100,
-      "full": 100
-    }, {
-      "category": "Active",
-      "value": 100 - (this.totalCritical / this.activeCases * 100),
-      "full": 100
-    }];
+  
 
-    // Make chart not full circle
-    chart.startAngle = -90;
-    chart.endAngle = 180;
-    chart.innerRadius = am4core.percent(20);
 
-    // Set number format
-    chart.numberFormatter.numberFormat = "#.#'%'";
-
-    // Create axes
-    let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis < am4charts.AxisRendererRadial > ());
-    categoryAxis.dataFields.category = "category";
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.grid.template.strokeOpacity = 0;
-    categoryAxis.renderer.labels.template.horizontalCenter = "right";
-    categoryAxis.renderer.labels.template.adapter.add("fill", function (fill, target) {
-      if (target.dataItem.index == 0) {
-        return am4core.color("#f9c851");
-      }
-      if (target.dataItem.index == 1) {
-        return am4core.color("#ff5b5b");
-      }
-      if (target.dataItem.index == 2) {
-        return am4core.color("#10c469");
-      }
-      return am4core.color("#21AFDD");
-    });
-    categoryAxis.renderer.minGridDistance = 10;
-
-    let valueAxis = chart.xAxes.push(new am4charts.ValueAxis < am4charts.AxisRendererCircular > ());
-    valueAxis.renderer.grid.template.strokeOpacity = 0;
-    valueAxis.min = 0;
-    valueAxis.max = 100;
-    valueAxis.strictMinMax = true;
-
-    valueAxis.renderer.labels.template.fill = am4core.color("#adb5bd");
-
-    // Create series
-    let series1 = chart.series.push(new am4charts.RadarColumnSeries());
-    series1.dataFields.valueX = "full";
-    series1.dataFields.categoryY = "category";
-    series1.clustered = false;
-    series1.columns.template.fill = new am4core.InterfaceColorSet().getFor("alternativeBackground");
-    series1.columns.template.fillOpacity = 0.08;
-    series1.columns.template["cornerRadiusTopLeft"] = 20;
-    series1.columns.template.strokeWidth = 0;
-    series1.columns.template.radarColumn.cornerRadius = 20;
-
-    let series2 = chart.series.push(new am4charts.RadarColumnSeries());
-    series2.dataFields.valueX = "value";
-    series2.dataFields.categoryY = "category";
-    series2.clustered = false;
-    series2.columns.template.strokeWidth = 0;
-    series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
-    series2.columns.template.radarColumn.cornerRadius = 20;
-
-    series2.columns.template.adapter.add("fill", function (fill, target) {
-      //return chart.colors.getIndex(target.dataItem.index);
-      if (target.dataItem.index == 0) {
-        return am4core.color("#f9c851");
-      }
-      if (target.dataItem.index == 1) {
-        return am4core.color("#ff5b5b");
-      }
-      if (target.dataItem.index == 2) {
-        return am4core.color("#10c469");
-      }
-      return am4core.color("#21AFDD");
-    });
-
-    // Add cursor
-    chart.cursor = new am4charts.RadarCursor();
-    chart.cursor.fill = am4core.color("#282e38");
-    chart.tooltip.label.fill = am4core.color("#282e38");
-
-    this.radarChart = chart;
-  }
-  createSeriesLine(chart, color, type) {
-    let name = type.charAt(0).toUpperCase() + type.slice(1);
-    let series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.valueY = type;
-    series.fill = am4core.color(color);
-    series.dataFields.dateX = "date";
-    series.strokeWidth = 2;
-    series.minBulletDistance = 10;
-    series.tooltipText = "{valueY} " + name;
-    series.tooltip.pointerOrientation = "vertical";
-
-    series.tooltip.background.cornerRadius = 20;
-    series.tooltip.background.fillOpacity = 0.5;
-
-    series.stroke = am4core.color(color);
-    series.legendSettings.labelText = name;
-    series.tooltip.autoTextColor = false;
-    series.tooltip.label.fill = am4core.color("#282e38");
-    return chart
-  }
 }

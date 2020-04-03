@@ -106,9 +106,53 @@
 
   </div>
 
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card-box">
+        <div class="float-md-right float-right d-md-inline d-none">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="enableLogarithmicScale" #enableLogarithmicScale (change)="loadLineChart(enableLogarithmicScale.checked)"
+            >
+            <label class="custom-control-label" for="enableLogarithmicScale">Enable Logarithmic Scale</label>
+          </div>
+        </div>
+        <h4 class="header-title mt-0 mb-3 mt-md-0">Infections History</h4>
+        <div class="fa-3x text-center" [class.d-none]="!isLoading">
+          <i class="fas fa-circle-notch fa-spin m-2"></i>
+        </div>
+        <div class="table-responsive" [class.d-none]="isLoading">
+          <div id="lineChart" style="width: 100%; height: 400px; overflow: hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3">
+      <div class="card-box text-center">
+        <h5>Outbreak Started</h5>
+        <app-countup></app-countup>
+      </div>
+      <div class="card-box text-center">
+  
+        <h5>Share with your friends, family or coworkers.</h5>
+        <p>Keep them up to date with the coronavirus outbreak.</p>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
+          href="https://www.facebook.com/sharer/sharer.php?u=https://metacoronavirus.com"> <i
+            class="fab fa-facebook"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
+          href="https://twitter.com/intent/tweet?url=https://metacoronavirus.com&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker">
+          <i class="fab fa-twitter"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
+          href="https://vk.com/share.php?url=https://metacoronavirus.com"> <i class="fab fa-vk"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue"
+          href="whatsapp://send?text=Coronavirus live statistics and tracker https://metacoronavirus.com"
+          data-action="share/whatsapp/share"> <i class="fab fa-whatsapp"></i> </a>
+      </div>
+    </div>
+  </div>
+
 
   <div class="row">
-    <div class="col-xl-4">
+    <div class="col-xl-12">
       <div class="card-box">
         <div class="float-right">
           <p>Today's Statistics</p>
@@ -135,7 +179,7 @@
           <i class="fas fa-circle-notch fa-spin m-2"></i>
         </div>
         <div class="infectedCountries" [class.d-none]="isLoadingCountries">
-          <perfect-scrollbar #perfectscrollbar style="height:346px;">
+          <!-- <perfect-scrollbar #perfectscrollbar style="height:346px;"> -->
             <div class="infectedCountry" *ngFor="let country of countries">
               <a [routerLink]="[ '/country', country.country.toLowerCase() ]">
                 <div class="infectedCountryFlag">
@@ -149,101 +193,20 @@
                 <h5 class="infectedCountryName mt-0 mb-1">{{country.country}}</h5>
                 <p class="infectedCountryDetails font-weight-bold"><span class="text-blue">{{country.cases}}
                     Cases</span> & <span class="text-danger">{{country.deaths}} Deaths</span></p>
-                <!-- <p class="infectedCountryCases text-blue">+{{country.todayCases}} Cases</p>
-                <p class="infectedCountryDeaths text-danger">+{{country.todayDeaths}} Deaths</p> -->
+                <p class="infectedCountryCases text-blue">+{{country.todayCases}} Cases</p>
+                <p class="infectedCountryDeaths text-danger">+{{country.todayDeaths}} Deaths</p>
               </a>
             </div>
-          </perfect-scrollbar>
+          <!-- </perfect-scrollbar> -->
 
 
         </div>
       </div>
     </div><!-- end col -->
-    <div class="col-xl-5">
-      <div class="card-box">
+ 
 
-        <h4 class="header-title mt-0 mb-3">Infection Rates</h4>
-        <div class="row">
-          <div class="col-12">
-            <div class="row">
-              <div class="col-xl-6 col-md-6">
-                <div class="card-box widget-user bg-d">
-                  <div class="text-center">
-                    <div class="fa-3x text-center" [class.d-none]="!isLoading">
-                      <i class="fas fa-circle-notch fa-spin m-2 text-blue"></i>
-                    </div>
-                    <h2 [class.d-none]="isLoading" class="font-weight-normal text-success">
-                      {{(totalRecoveries / finishedCases * 100) | number:'.1-2'}}%</h2>
-                    <h5>Recovery Rate</h5>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-6 col-md-6">
-                <div class="card-box widget-user bg-d">
-                  <div class="text-center">
-                    <div class="fa-3x text-center" [class.d-none]="!isLoading">
-                      <i class="fas fa-circle-notch fa-spin m-2 text-danger"></i>
-                    </div>
-                    <h2 [class.d-none]="isLoading" class="font-weight-normal text-danger">
-                      {{(totalDeaths / finishedCases * 100) | number:'.1-2'}}%</h2>
-                    <h5>Death Rate</h5>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-6 col-md-6">
-                <div class="card-box widget-user bg-d">
-                  <div class="text-center">
-                    <div class="fa-3x text-center" [class.d-none]="!isLoading">
-                      <i class="fas fa-circle-notch fa-spin m-2 text-warning"></i>
-                    </div>
-                    <h2 [class.d-none]="isLoading" class="font-weight-normal text-warning">
-                      {{(totalCritical / activeCases * 100) | number:'.1-2'}}%</h2>
-                    <h5>Critical Rate</h5>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-6 col-md-6">
-                <div class="card-box widget-user bg-d">
-                  <div class="text-center">
-                    <div class="fa-3x text-center" [class.d-none]="!isLoading">
-                      <i class="fas fa-circle-notch fa-spin m-2 text-info"></i>
-                    </div>
-                    <h2 [class.d-none]="isLoading" class="font-weight-normal text-info" *ngIf="fuse">
-                      {{fuse.list.length}}</h2>
-                    <h5>Nations Affected</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- end col -->
-    <div class="col-xl-3">
-      <div class="card-box text-center">
-        <h5>Outbreak Started</h5>
-        <app-countup></app-countup>
-      </div>
-      <div class="card-box text-center">
-
-        <h5>Share with your friends, family or coworkers.</h5>
-        <p>Keep them up to date with the coronavirus outbreak.</p>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
-          href="https://www.facebook.com/sharer/sharer.php?u=https://metacoronavirus.com"> <i
-            class="fab fa-facebook"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
-          href="https://twitter.com/intent/tweet?url=https://metacoronavirus.com&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker">
-          <i class="fab fa-twitter"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
-          href="https://vk.com/share.php?url=https://metacoronavirus.com"> <i class="fab fa-vk"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue"
-          href="whatsapp://send?text=Coronavirus live statistics and tracker https://metacoronavirus.com"
-          data-action="share/whatsapp/share"> <i class="fab fa-whatsapp"></i> </a>
-      </div>
-    </div>
+   
+    
     <!-- end col -->
     <!-- <div class="col-xl-8">
       <div class="card-box">
@@ -257,8 +220,7 @@
           <button type="button" class="btn btn-xs btn-lighten-warning waves-effect waves-light width-xs"
             (click)="loadMap('critical')">Critical</button>
         </div>
-        <h4 class="header-title mt-0 mb-3 mt-md-0">Worldwide Infections <button type="button" class="btn btn-xs btn-lighten-secondary waves-effect waves-light width-xs mr-md-1 mr-0"
-          (click)="showModal();">How to prevent?</button></h4>
+        <h4 class="header-title mt-0 mb-3 mt-md-0">Worldwide Infections </h4>
         <div class="fa-3x text-center" [class.d-none]="!isLoadingMap">
           <i class="fas fa-circle-notch fa-spin m-2"></i>
         </div>
@@ -279,49 +241,21 @@
             (click)="loadMap('critical')">Critical</button>
         </div>
       </div>
-    </div> -->
+    </div>  -->
     <!-- end col -->
 
   </div>
-  <!-- <div class="row">
-    <div class="col-xl-4">
-      <div class="card-box">
-        <h4 class="header-title mb-3">Rate Distribution </h4>
-        <div class="fa-3x text-center" [class.d-none]="!isLoading">
-          <i class="fas fa-circle-notch fa-spin m-2"></i>
-        </div>
-        <div class="inbox-widget" [class.d-none]="isLoading">
 
-          <div id="radarChart" style="width: 100%; height: 400px"></div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-8">
-      <div class="card-box">
-        <div class="float-md-right float-right d-md-inline d-none">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="enableLogarithmicScale" #enableLogarithmicScale (change)="loadLineChart(enableLogarithmicScale.checked)"
-            >
-            <label class="custom-control-label" for="enableLogarithmicScale">Enable Logarithmic Scale</label>
-          </div>
-        </div>
-        <h4 class="header-title mt-0 mb-3 mt-md-0">Infections History</h4>
-        <div class="fa-3x text-center" [class.d-none]="!isLoading">
-          <i class="fas fa-circle-notch fa-spin m-2"></i>
-        </div>
-        <div class="table-responsive" [class.d-none]="isLoading">
-          <div id="lineChart" style="width: 100%; height: 400px; overflow: hidden"></div>
-        </div>
-      </div>
-    </div>
-
-  </div> -->
 
 
   
 
   <introduction></introduction>
 
+  
+
 </div> <!-- end container -->
+
+
+<!-- <button type="button" class="btn btn-xs btn-lighten-secondary waves-effect waves-light width-xs mr-md-1 mr-0"
+          (click)="showModal();">How to prevent?</button> -->
