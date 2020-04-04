@@ -1,17 +1,22 @@
 <div class="container-fluid mt-4">
   <div class="wrap-country" *ngIf="country">
-    <img 
-    width="100px" src="assets/flags/{{countryCodes[country.country].toLowerCase()}}.svg" alt="{{country.country}}"> 
+    <img width="100px" src="assets/flags/{{countryCodes[country.country].toLowerCase()}}.svg" alt="{{country.country}}">
 
-    <h2 class="text-center mt-3 mb-3">
-     {{country.country}}'s Statistics</h2>
-     <p class="white">
-         {{country.country}} corona virus live data and stats about total 
-       number of cases, recovered cases and total death. Get all news and updates about COVID19 in {{country.country}}
+    <h2 *ngIf="country.country" class="text-center mt-3 mb-2 heading-common">
+      {{country.country}} COVID19 Stats</h2>
+    <div *ngIf="indiaData" class="date-wrapper mb-3">
+      <p class="date-heading">Last updated:</p>
+      <p class="date text-center">
+        {{indiaData.lastupdatedtime | date:'medium'}}
+      </p>
+    </div>
+    <p class="white">
+      {{country.country}} corona virus live data and stats about total
+      number of cases, recovered cases and total death. Get all news and updates about COVID19 in {{country.country}}
     </p>
 
-     </div>
-   <div class="row">
+  </div>
+  <div class="row" *ngIf="activeCountryName != 'india'">
     <div class="col-xl-3 col-md-6 col-6">
       <div class="card-box">
         <h4 class="header-title m-0 text-md-left text-center">Infections</h4>
@@ -118,274 +123,201 @@
   </div>
 
 
-  <div *ngIf="activeCountryName == 'india'" class="row mt-2">
-    <h2 class="mt-4 mb-4">State Wise Breakdown</h2>
-    <div class="data-table table-responsive">		
-      <table class="table">
-      <thead>
-        <tr>
-        <th><strong>S.No</strong></th>
-        <th><strong>State</strong></th>
-        <th><strong>Cases </strong></th>                              
-        <th><strong>Cured </strong> </th>
-        <th><strong>Death</strong></th>
-        </tr>
-      </thead>	
-      <tbody>
-        <tr>
-        <td>1</td>
-        <td>Andhra Pradesh</td>
-        <td>132</td>
-        <td>1</td>
-        <td>1</td>
-        </tr>
-        
-        <tr>
-        <td>2</td>
-        <td>Andaman and Nicobar Islands</td>
-        <td>10</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-        <tr>
-        <td>3</td>
-        <td>Arunachal Pradesh</td>
-        <td>1</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>4</td>
-        <td>Assam</td>
-        <td>16</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>5</td>
-        <td>Bihar</td>
-        <td>24</td>
-        <td>0</td>
-        <td>1</td>
-        </tr>
-        
-        <tr>
-        <td>6</td>
-        <td>Chandigarh</td>
-        <td>18</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>7</td>
-        <td>Chhattisgarh</td>
-        <td>9</td>
-        <td>2</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>8</td>
-        <td>Delhi</td>
-        <td>219</td>
-        <td>8</td>
-        <td>4</td>
-        </tr>
-        
-        <tr>
-        <td>9</td>
-        <td>Goa</td>
-        <td>6</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>10</td>
-        <td>Gujarat</td>
-        <td>87</td>
-        <td>8</td>
-        <td>7</td>
-        </tr>
-        
-        <tr>
-        <td>11</td>
-        <td>Haryana</td>
-        <td>43</td>
-        <td>21</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>12</td>
-        <td>Himachal Pradesh</td>
-        <td>6</td>
-        <td>1</td>
-        <td>1</td>
-        </tr>
-        
-        <tr>
-        <td>13</td>
-        <td>Jammu and Kashmir</td>
-        <td>70</td>
-        <td>3</td>
-        <td>2</td>
-        </tr>
-        <tr>
-        <td>14</td>
-        <td>Jharkhand</td>
-        <td>2</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>15</td>
-        <td>Karnataka</td>
-        <td>124</td>
-        <td>10</td>
-        <td>3</td>
-        </tr>
-        
-        <tr>
-        <td>16</td>
-        <td>Kerala</td>
-        <td>286</td>
-        <td>27</td>
-        <td>2</td>
-        </tr>
-        
-        <tr>
-        <td>17</td>
-        <td>Ladakh</td>
-        <td>14</td>
-        <td>3</td>
-        <td>0</td>
-        </tr>
-      
-        <tr>
-        <td>18</td>
-        <td>Madhya Pradesh</td>
-        <td>99</td>
-        <td>0</td>
-        <td>6</td>
-        </tr>
-        
-        <tr>
-        <td>19</td>
-        <td>Maharashtra</td>
-        <td>335</td>
-        <td>42</td>
-        <td>16</td>
-        </tr>
-        
-        <tr>
-        <td>20</td>
-        <td>Manipur</td>
-        <td>2</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>21</td>
-        <td>Mizoram</td>
-        <td>1</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-      
-        <tr>
-        <td>22</td>
-        <td>Odisha</td>
-        <td>5</td>
-        <td>0</td>
-        <td>0</td>
-        </tr>
-      
-        <tr>
-        <td>23</td>
-        <td>Puducherry</td>
-        <td>3</td>
-        <td>1</td>
-        <td>0</td>
-        </tr>
-      
-        <tr>
-        <td>24</td>
-        <td>Punjab</td>
-        <td>46</td>
-        <td>1</td>
-        <td>4</td>
-        </tr>
-        
-        <tr>
-        <td>25</td>
-        <td>Rajasthan</td>
-        <td>133</td>
-        <td>3</td>
-        <td>0</td>
-        </tr>
-      
-        <tr>
-        <td>26</td>
-        <td>Tamil Nadu</td>
-        <td>309</td>
-        <td>6</td>
-        <td>1</td>
-        </tr>
-        
-        <tr>
-        <td>27</td>
-        <td>Telengana</td>
-        <td>107</td>
-        <td>1</td>
-        <td>3</td>
-        </tr>
-        
-        <tr>
-        <td>28</td>
-        <td>Uttarakhand</td>
-        <td>10</td>
-        <td>2</td>
-        <td>0</td>
-        </tr>
-        
-        <tr>
-        <td>28</td>
-        <td>Uttar Pradesh</td>
-        <td>113</td>
-        <td>14</td>
-        <td>2</td>
-        </tr>                    
-        
-        <tr>
-        <td>29</td>
-        <td>West Bengal</td>
-        <td>53</td>
-        <td>3</td>
-        <td>3</td>
-        </tr>
-        
-        <tr>
-        <td colspan="2"><strong>Total number of confirmed cases in India</strong></td>
-        <td><strong>2301*</strong></td>
-        <td>
-        <strong>157</strong>
-        </td>
-        <td>
-        <strong>56</strong>
-        </td>
-        </tr>
-        <tr>
-        <td colspan="5"><strong>*Remaining 18 cases are being assigned to states for contact tracing</strong></td>
-        </tr>
-      </tbody>
-      </table>
+  <!-- Only for india -->
+  <div class="row indiaCards" *ngIf="activeCountryName == 'india' && indiaData">
+    <div class="col-xl-3 col-md-6 col-6">
+      <div class="card-box">
+        <h4 class="header-title m-0 text-md-left text-center">Confirmed</h4>
+
+        <div class="topBoxes">
+          <div class="fa-3x text-center" [class.d-none]="!isLoading">
+            <i class="fas fa-circle-notch fa-spin m-2"></i>
+          </div>
+          <div class="topBoxesDetails text-md-right text-center" [class.d-none]="isLoading">
+
+            <span class="badge badge-blue badge-pill float-md-left m-md-3 mt-2">
+              {{ indiaData.deltaconfirmed / indiaData.confirmed * 100 |  number:'.1-2' }} %
+              <i class="mdi mdi-trending-up"></i>
+            </span>
+            <h2 class="font-weight-normal"> {{indiaData.confirmed | number}} </h2>
+            <p class="text-muted">{{indiaData.deltaconfirmed}} today</p>
+          </div>
+          <div class="progress progress-bar-alt-blue progress-sm m-0">
+            <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="77" aria-valuemin="0"
+              aria-valuemax="100" style="width: 100%;">
+            </div>
+          </div>
+        </div>
       </div>
+
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6 col-6">
+      <div class="card-box">
+        <h4 class="header-title m-0 text-md-left text-center">Active</h4>
+
+        <div class="topBoxes">
+          <div class="fa-3x text-center" [class.d-none]="!isLoading">
+            <i class="fas fa-circle-notch fa-spin m-2"></i>
+          </div>
+          <div class="topBoxesDetails text-md-right text-center" [class.d-none]="isLoading">
+            <!-- <span
+              class="badge badge-warning badge-pill float-md-left m-md-3 mt-2">{{(totalCritical / activeCases * 100) | number:'.1-2'}}%
+              <i class="mdi mdi-trending-up"></i> </span> -->
+            <h2 class="font-weight-normal"> {{indiaData.active | number}} </h2>
+            <!-- <p class="text-muted">{{indiaData.active | number}} taday</p> -->
+          </div>
+          <div class="progress progress-bar-alt-warning progress-sm m-0">
+            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="77" aria-valuemin="0"
+              aria-valuemax="100" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6 col-6">
+      <div class="card-box">
+        <h4 class="header-title m-0 text-md-left text-center">Recoveries</h4>
+
+        <div class="topBoxes">
+          <div class="fa-3x text-center" [class.d-none]="!isLoading">
+            <i class="fas fa-circle-notch fa-spin m-2"></i>
+          </div>
+          <div class="topBoxesDetails text-md-right text-center" [class.d-none]="isLoading">
+            <span
+              class="badge badge-success badge-pill float-md-left m-md-3 mt-2">{{(indiaData.recovered / indiaData.active * 100) | number:'.1-2'}}%
+              <i class="mdi mdi-trending-up"></i> </span>
+            <h2 class="font-weight-normal"> {{indiaData.recovered | number}} </h2>
+            <p class="text-muted">{{indiaData.deltarecovered | number}} remaining</p>
+          </div>
+          <div class="progress progress-bar-alt-success progress-sm m-0">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="77" aria-valuemin="0"
+              aria-valuemax="100" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6 col-6">
+      <div class="card-box">
+        <h4 class="header-title m-0 text-md-left text-center">Deaths</h4>
+
+        <div class="topBoxes">
+          <div class="fa-3x text-center" [class.d-none]="!isLoading">
+            <i class="fas fa-circle-notch fa-spin m-2"></i>
+          </div>
+          <div class="topBoxesDetails text-md-right text-center" [class.d-none]="isLoading">
+            <span
+              class="badge badge-danger badge-pill float-md-left m-md-3 mt-2">{{(indiaData.deaths / indiaData.confirmed * 100) | number:'.1-2'}}%
+              <i class="mdi mdi-trending-up"></i> </span>
+            <h2 class="font-weight-normal"> {{indiaData.deaths | number}} </h2>
+            <p class="text-muted">{{indiaData.deltadeaths}} today</p>
+          </div>
+          <div class="progress progress-bar-alt-danger progress-sm m-0">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="77" aria-valuemin="0"
+              aria-valuemax="100" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end col -->
+
+  </div>
+
+  <!-- state wise breakdown -->
+
+  <div *ngIf="activeCountryName == 'india'" class="row mt-2">
+    <h2 class="mt-4 mb-1 heading-common">State's Stats</h2>
+    <p class="warning mb-3 text-center">
+      Data is collected from various news channels and state goverments official social accounts. 
+    </p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="sticky" scope="col">State/UT</th>
+            <th style="color:#21AFDD;" class="sticky" scope="col">Confirm</th>
+            <th style="color:#10c469;" class="sticky" scope="col">Recover</th>
+            <th style="color:#ff5b5b;" class="sticky" scope="col">Death</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="onStateData(state.state)" class="pointer" *ngFor="let state of indiaStatesData">
+            <td scope="row"> {{state.state}} </td>
+
+            <td scope="row">
+              <span *ngIf="state.deltaconfirmed != 0" class="deltas" style="color: #21AFDD;"><svg xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="19" x2="12" y2="5"></line>
+                  <polyline points="5 12 12 5 19 12"></polyline>
+                </svg>{{state.deltaconfirmed}}</span> {{state.confirmed}} </td>
+
+            <td scope="row"> <span  *ngIf="state.deltarecovered != 0" class="deltas" style="color: #10c469;"><svg xmlns="http://www.w3.org/2000/svg"
+              width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>{{state.deltarecovered}}</span> {{state.recovered}} </td>
+
+            <td scope="row"> <span *ngIf="state.deltadeaths != 0" class="deltas" style="color: #ff5b5b;"><svg xmlns="http://www.w3.org/2000/svg"
+              width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>{{state.deltadeaths}}</span> {{state.deaths}} </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- testing reports -->
+
+  <div *ngIf="activeCountryName == 'india'" class="row mt-2">
+    <h2 class="mt-4 mb-1 heading-common">Testing Stats</h2>
+    <p class="warning text-center mb-3">
+      <span>Data source: </span> ICMR website and MoH Press conference with Dr. Raman G
+     </p>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="sticky" scope="col">Date</th>
+            <th style="color:#21AFDD;" class="sticky" scope="col">Samples tested</th>
+            <th style="color:#ff5b5b;" class="sticky" scope="col">Positive cases</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let test of indiaTestData">
+
+            <td *ngIf="test.totalpositivecases" scope="row">
+               {{test.updatetimestamp}} 
+            </td>
+
+            <td *ngIf="test.totalpositivecases" scope="row">
+               {{test.totalsamplestested}} 
+            </td>
+
+            <td *ngIf="test.totalpositivecases" scope="row">  
+              <span class="badge badge-danger badge-pill">
+                {{(test.totalpositivecases / test.totalsamplestested * 100) | number:'.1-2'}}% 
+              <i class="mdi mdi-trending-up"></i> </span>
+              {{test.totalpositivecases}} 
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- <div class="row">
@@ -421,24 +353,15 @@
   </div> -->
 
 
-  <div class="row mt-4">
-    <!-- <div class="col-xl-4">
-      <div class="card-box">
-        <h4 class="header-title mb-3" *ngIf="country">
-{{country.country}}'s Cases Distribution
-</h4>
-        <div class="fa-3x text-center" [class.d-none]="!isLoading">
-          <i class="fas fa-circle-notch fa-spin m-2"></i>
-        </div>
-        <div class="inbox-widget" [class.d-none]="isLoading">
 
-          <div id="pieChart" style="width: 100%; height: 300px"></div>
 
-        </div>
-      </div>
-    </div> -->
 
-    <div class="col-xl-5">
+
+
+  <!-- common for all countries -->
+  <div class="row mt-5 container">
+
+    <div class="col-xl-6">
       <div class="card-box">
 
         <h4 class="header-title mt-0 mb-3">Infection Rates</h4>
@@ -452,7 +375,8 @@
                       <i class="fas fa-circle-notch fa-spin m-2 text-blue"></i>
                     </div>
                     <h2 [class.d-none]="isLoading" class="font-weight-normal text-success">
-                      <span *ngIf="finishedCases>0 else naRecovery">{{(totalRecoveries / totalCases * 100) | number:'.1-2'}}%</span>
+                      <span
+                        *ngIf="finishedCases>0 else naRecovery">{{(totalRecoveries / totalCases * 100) | number:'.1-2'}}%</span>
                       <ng-template #naRecovery>
                         <span>N/A</span>
                       </ng-template>
@@ -469,7 +393,8 @@
                       <i class="fas fa-circle-notch fa-spin m-2 text-danger"></i>
                     </div>
                     <h2 [class.d-none]="isLoading" class="font-weight-normal text-danger">
-                      <span *ngIf="finishedCases>0 else naDeath">{{(totalDeaths / totalCases * 100) | number:'.1-2'}}%</span>
+                      <span
+                        *ngIf="finishedCases>0 else naDeath">{{(totalDeaths / totalCases * 100) | number:'.1-2'}}%</span>
                       <ng-template #naDeath>
                         <span>N/A</span>
                       </ng-template>
@@ -498,7 +423,8 @@
                     <div class="fa-3x text-center" [class.d-none]="!isLoading">
                       <i class="fas fa-circle-notch fa-spin m-2 text-info"></i>
                     </div>
-                    <h2 [class.d-none]="isLoading" class="font-weight-normal text-info">{{(100-(totalCritical / activeCases * 100)) | number:'.1-2'}}%</h2>
+                    <h2 [class.d-none]="isLoading" class="font-weight-normal text-info">
+                      {{(100-(totalCritical / activeCases * 100)) | number:'.1-2'}}%</h2>
                     <h5>Mild Cases</h5>
                   </div>
                 </div>
@@ -508,15 +434,22 @@
         </div>
       </div>
     </div><!-- end col -->
-    <div class="col-xl-3">
+    <div class="col-xl-6">
       <div class="card-box text-center">
 
         <h5>Share with your friends, family or coworkers.</h5>
         <p>To keep them up to date with the coronavirus outbreak.</p>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://metacoronavirus.com"> <i class="fab fa-facebook"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://twitter.com/intent/tweet?url=https://metacoronavirus.com&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker"> <i class="fab fa-twitter"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank" href="https://vk.com/share.php?url=https://metacoronavirus.com"> <i class="fab fa-vk"></i> </a>
-        <a class="btn btn-icon waves-effect btn-blue" href="whatsapp://send?text=Coronavirus live statistics and tracker https://metacoronavirus.com" data-action="share/whatsapp/share"> <i class="fab fa-whatsapp"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
+          href="https://www.facebook.com/sharer/sharer.php?u=https://metacoronavirus.com"> <i
+            class="fab fa-facebook"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
+          href="https://twitter.com/intent/tweet?url=https://metacoronavirus.com&hashtags=Covid_19,CoronavirusPandemic,coronastatistics,corona&text=Stay%20Updated%20with%20Live%20Coronavirus%20Tracker">
+          <i class="fab fa-twitter"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue mr-1" target="_blank"
+          href="https://vk.com/share.php?url=https://metacoronavirus.com"> <i class="fab fa-vk"></i> </a>
+        <a class="btn btn-icon waves-effect btn-blue"
+          href="whatsapp://send?text=Coronavirus live statistics and tracker https://metacoronavirus.com"
+          data-action="share/whatsapp/share"> <i class="fab fa-whatsapp"></i> </a>
       </div>
       <div class="card-box text-center">
 
@@ -529,3 +462,44 @@
 
 
 </div> <!-- end container -->
+
+<p class="warning mb-3 mt-3 text-center"><span>Note: </span> We are not a government organization, all the data which is displying is derived
+  from various news channel reports and goverment websites. </p>
+
+
+
+<div *ngIf="isStateModal" class="distictModal">
+  <div *ngIf="selectedStateData" class="actual-data row mt-2">
+    <i (click)="isStateModal = !isStateModal" class="fa fa-times" aria-hidden="true"></i>
+    <h2 class="mt-4 mb-2 mb-1 heading-common">{{selectedState}} District Stats</h2>
+
+    <div class="table-responsive modal-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="sticky" scope="col">State/UT</th>
+            <th style="color:#ff5b5b;" class="sticky" scope="col">Confirmed Cases</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="onStateData()" class="pointer" *ngFor="let state of selectedStateData">
+            <td scope="row"> {{state.name}} </td>
+
+            <td scope="row">
+              <span *ngIf="state.deltaconfirmed != 0" class="deltas" style="color: #ff5b5b;"><svg xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="19" x2="12" y2="5"></line>
+                  <polyline points="5 12 12 5 19 12"></polyline>
+                </svg>{{state.deltaconfirmed}}</span> {{state.district.confirmed}} </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="warning mb-2 mt-3 text-center">
+      Data is collected from various news channels and state goverments official social accounts. 
+    </p>
+  </div>
+</div>

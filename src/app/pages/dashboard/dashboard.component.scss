@@ -15,3 +15,28 @@
     height: 220px;
   }
 }
+.india-tracker-btn{
+   display: none;
+  .btn-custom{
+    border-radius: 5px;
+    border: 1px solid #668c57;
+    background: #99db70;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    margin: auto;
+    text-transform: uppercase;
+    display: block;
+    font-weight: 600;
+  }
+}
+@media (max-width: 720px) {
+  .india-tracker-btn{
+    display: block;
+  }
+  .container-fluid{
+    margin-top: 1rem !important;
+  }
+  .card-box{
+    padding: 1rem;
+  }
+}

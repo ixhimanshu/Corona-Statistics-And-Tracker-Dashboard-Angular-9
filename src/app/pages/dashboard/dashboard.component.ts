@@ -26,6 +26,7 @@ import {
 } from 'util';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { trigger, transition, animate, style, state } from '@angular/animations'
+import { Router } from '@angular/router';
 
 //am4core.useTheme(am4themes_dataviz);
 am4core.useTheme(am4themes_animated);
@@ -49,6 +50,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   isModalShown = false;
   public modalStep = 1;
+  userCountry: string;
   showModal(): void {
     this.modalStep = 1;
     this.isModalShown = true;
@@ -379,15 +381,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
     return data
   }
-  constructor(private zone: NgZone, private _getDataService: GetdataService) {
-    this.generateSitemap();
+  constructor(private zone: NgZone, private _getDataService: GetdataService, private route: Router) {
   }
 
   ngAfterViewInit() {
 
   }
 
-  ngOnDestroy() {
+  ngOnDestroy() { 
     this.zone.runOutsideAngular(() => {
       if (this.pieChart) {
         this.pieChart.dispose();
@@ -439,9 +440,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       });
       this.timeLine = getTimelineData;
       this.loadLineChart(false);
-      this.loadRadar();
-      this.loadPieChart();
-
+      // this.loadRadar();
+      // this.loadPieChart();
+      this.userCountry = localStorage.getItem('country');
 
      });
     });
@@ -516,30 +517,6 @@ https://moviesflux.blogspot.com/2020/03/go-karts-2020-in-dual-audio-hindi_29.htm
       this.countries = data;
       this.isLoadingCountries = false;
     });
-  }
-
-  loadPieChart() {
-    let tempData = this.fuse.list.slice();
-    this.sortData(tempData, "cases");
-    tempData = tempData.reverse();
-    let chart = am4core.create("pieChart", am4charts.PieChart);
-    chart.data = tempData.slice(0, 10);
-    let otherCases = tempData.slice(10, tempData.length);
-    chart.data.push({
-      country: 'Other',
-      cases: this.calculateSum("cases", otherCases)
-    });
-    let pieSeries = chart.series.push(new am4charts.PieSeries());
-    pieSeries.dataFields.value = "cases";
-    pieSeries.dataFields.category = "country";
-    pieSeries.labels.template.disabled = true;
-    pieSeries.ticks.template.disabled = true;
-    pieSeries.slices.template.stroke = am4core.color("#313a46");
-    pieSeries.slices.template.strokeWidth = 1;
-    pieSeries.slices.template.strokeOpacity = 1;
-    this.pieChart = chart;
-
-    this.loadMap("cases");
   }
 
   loadLineChart(chartType) {
@@ -676,104 +653,13 @@ https://moviesflux.blogspot.com/2020/03/go-karts-2020-in-dual-audio-hindi_29.htm
     this.mapChart = chartMap;
   }
 
-  loadRadar() {
-    let chart = am4core.create("radarChart", am4charts.RadarChart);
-
-    // Add data
-    chart.data = [{
-      "category": "Critical",
-      "value": this.totalCritical / this.activeCases * 100,
-      "full": 100
-    }, {
-      "category": "Death",
-      "value": this.totalDeaths / this.finishedCases * 100,
-      "full": 100
-    }, {
-      "category": "Recovered",
-      "value": this.totalRecoveries / this.finishedCases * 100,
-      "full": 100
-    }, {
-      "category": "Active",
-      "value": 100-(this.totalCritical / this.activeCases * 100),
-      "full": 100
-    }];
-
-    // Make chart not full circle
-    chart.startAngle = -90;
-    chart.endAngle = 180;
-    chart.innerRadius = am4core.percent(20);
-
-    // Set number format
-    chart.numberFormatter.numberFormat = "#.#'%'";
-
-    // Create axes
-    let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis<am4charts.AxisRendererRadial>());
-    categoryAxis.dataFields.category = "category";
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.grid.template.strokeOpacity = 0;
-    categoryAxis.renderer.labels.template.horizontalCenter = "right";
-    categoryAxis.renderer.labels.template.adapter.add("fill", function (fill, target) {
-      if(target.dataItem.index==0){
-        return am4core.color("#f9c851");
-      }
-      if(target.dataItem.index==1){
-        return am4core.color("#ff5b5b");
-      }
-      if(target.dataItem.index==2){
-        return am4core.color("#10c469");
-      }
-      return am4core.color("#21AFDD");
-    });
-    categoryAxis.renderer.minGridDistance = 10;
-
-    let valueAxis = chart.xAxes.push(new am4charts.ValueAxis<am4charts.AxisRendererCircular>());
-    valueAxis.renderer.grid.template.strokeOpacity = 0;
-    valueAxis.min = 0;
-    valueAxis.max = 100;
-    valueAxis.strictMinMax = true;
-
-    valueAxis.renderer.labels.template.fill = am4core.color("#adb5bd");
-
-    // Create series
-    let series1 = chart.series.push(new am4charts.RadarColumnSeries());
-    series1.dataFields.valueX = "full";
-    series1.dataFields.categoryY = "category";
-    series1.clustered = false;
-    series1.columns.template.fill = new am4core.InterfaceColorSet().getFor("alternativeBackground");
-    series1.columns.template.fillOpacity = 0.08;
-    series1.columns.template["cornerRadiusTopLeft"] = 20;
-    series1.columns.template.strokeWidth = 0;
-    series1.columns.template.radarColumn.cornerRadius = 20;
-
-    let series2 = chart.series.push(new am4charts.RadarColumnSeries());
-    series2.dataFields.valueX = "value";
-    series2.dataFields.categoryY = "category";
-    series2.clustered = false;
-    series2.columns.template.strokeWidth = 0;
-    series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
-    series2.columns.template.radarColumn.cornerRadius = 20;
-
-    series2.columns.template.adapter.add("fill", function (fill, target) {
-      //return chart.colors.getIndex(target.dataItem.index);
-      if(target.dataItem.index==0){
-        return am4core.color("#f9c851");
-      }
-      if(target.dataItem.index==1){
-        return am4core.color("#ff5b5b");
-      }
-      if(target.dataItem.index==2){
-        return am4core.color("#10c469");
-      }
-      return am4core.color("#21AFDD");
-    });
-
-    // Add cursor
-    chart.cursor = new am4charts.RadarCursor();
-    chart.cursor.fill = am4core.color("#282e38");
-    chart.tooltip.label.fill = am4core.color("#282e38");
-
-    this.radarChart = chart;
+  findRoute() {
+    setTimeout(() => {
+      this.route.navigate([`/country/${this.userCountry}`]);
+    }, 200)
   }
+
+
   createSeriesLine(chart, color, type) {
     let name = type.charAt(0).toUpperCase() + type.slice(1);
     let series = chart.series.push(new am4charts.LineSeries());

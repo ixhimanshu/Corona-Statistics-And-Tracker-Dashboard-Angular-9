@@ -45,7 +45,7 @@ export class TopbarComponent {
 }
 
 checkCountry(){
-  if(!this.userCountryData){
+  if(!localStorage.getItem('country')){
     fetch('https://api.ipgeolocation.io/ipgeo?apiKey=9a6cc34c2f8042faaa3997b8230991d9')
     .then((res:any) => res.json() )
     .then(data => {
@@ -53,6 +53,7 @@ checkCountry(){
       if(data.country_code2) {
         this.showCountryFlag = true;
         this.userCountryData = data;
+        localStorage.setItem( 'country', this.userCountryData.country_name);
       }
     })
   }

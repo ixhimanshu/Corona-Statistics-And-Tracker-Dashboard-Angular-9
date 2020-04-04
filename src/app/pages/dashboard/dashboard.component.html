@@ -1,4 +1,10 @@
 <div class="container-fluid">
+
+  <div (click)="findRoute()" *ngIf="userCountry" class="mb-3 india-tracker-btn">
+    <button class="btn-custom">
+      Check {{userCountry}}'s COVID19 Stats
+    </button>
+  </div>
   
   <div class="row">
     <div class="card-item col-xl-3 col-md-6 col-6">

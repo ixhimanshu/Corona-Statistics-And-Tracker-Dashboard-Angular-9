@@ -7,7 +7,6 @@ import {
   ActivatedRoute
 } from "@angular/router";
 
-import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 
 import {
@@ -42,7 +41,13 @@ export class CountryComponent implements OnInit {
   public casesPer1M=0;
   public finishedCases=0;
   activeCountryName: string;
-
+  indiaData: any;
+  indiaTestData: Array<any> = [];
+  indiaStatesData: Array<any> = [];
+  isStateModal = false;
+  allStatesData: any;
+  selectedStateData: Array<any> = [];
+  selectedState: any;
 
   constructor(private route: ActivatedRoute, private _getDataService: GetdataService, private zone: NgZone) {
   }
@@ -301,35 +306,6 @@ export class CountryComponent implements OnInit {
 
   public country: any;
 
-  loadPieChart() {
-    let chart = am4core.create("pieChart", am4charts.PieChart);
-    chart.data.push({
-      type: 'Recoveries',
-      number: this.totalRecoveries,
-      "color": am4core.color("#10c469")
-    });
-    chart.data.push({
-      type: 'Deaths',
-      number: this.totalDeaths,
-      "color": am4core.color("#ff5b5b")
-    });
-    chart.data.push({
-      type: 'Critical',
-      number: this.totalCritical,
-      "color": am4core.color("#f9c851")
-    });
-    let pieSeries = chart.series.push(new am4charts.PieSeries());
-    pieSeries.dataFields.value = "number";
-    pieSeries.dataFields.category = "type";
-    pieSeries.labels.template.disabled = true;
-    pieSeries.ticks.template.disabled = true;
-    pieSeries.slices.template.propertyFields.fill = "color";
-    pieSeries.slices.template.stroke = am4core.color("#313a46");
-    pieSeries.slices.template.strokeWidth = 1;
-    pieSeries.slices.template.strokeOpacity = 1;
-    this.pieChart = chart;
-  }
-
   ngOnDestroy() {
     this.zone.runOutsideAngular(() => {
       if (this.pieChart) {
@@ -348,6 +324,9 @@ export class CountryComponent implements OnInit {
   ngOnInit() {
     let nameTimeline = this.route.snapshot.paramMap.get("name").toLowerCase();
     this.activeCountryName = this.route.snapshot.paramMap.get("name").toLowerCase();
+    if(nameTimeline == 'india') {
+      this.indianStats();
+    }
     if (nameTimeline == "usa") {
       nameTimeline = "us";
     } else if(nameTimeline == "taiwan"){
@@ -442,9 +421,54 @@ export class CountryComponent implements OnInit {
 
   }
 
-
+  indianStats() {
+    fetch('https://api.covid19india.org/data.json')
+    .then(res => res.json())
+    .then(data => {
+      this.indiaData = data.statewise[0]; 
+      this.indiaTestData = data.tested.reverse();
+      // this.indiaStatesData = data.statewise.slice(1,data.statewise.length);
+      data.statewise.slice(1,data.statewise.length).forEach(element => {
+        if(element.confirmed > 0){
+          this.indiaStatesData.push(element);
+        }
+      });
+      console.log(data);
+    });
+  }
 
   
+  onStateData(state){
+    this.isStateModal = !this.isStateModal;
+    this.selectedState = state;
+    console.log('state', state);
+    
+    if(this.allStatesData) {
+      this.selectedStateData = [];
+      Object.keys(this.allStatesData[state].districtData).forEach(element => {
+        const payload = {
+          name: element,
+          district: this.allStatesData[state].districtData[element]
+        }
+        this.selectedStateData.push(payload)
+      });
+      console.log(this.selectedStateData);
+    } else {
+      fetch('https://api.covid19india.org/state_district_wise.json')
+      .then(res => res.json())
+      .then(data => {
+        this.allStatesData = data;
+        Object.keys(this.allStatesData[state].districtData).forEach(element => {
+            const payload = {
+              name: element,
+              district: this.allStatesData[state].districtData[element]
+            }
+            this.selectedStateData.push(payload)
+        });
+        console.log(this.selectedStateData);
+      });
+    }
+  }
 
 
 }

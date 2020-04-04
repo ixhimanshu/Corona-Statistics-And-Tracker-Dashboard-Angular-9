@@ -18,7 +18,7 @@
 
             <div [class.active]="isSidebar" class="side-menu">
               <ul>
-                <li (click)="findRoute()"> {{userCountryData.country_name}} Stats </li>
+                <li *ngIf="userCountryData" (click)="findRoute()"> {{userCountryData.country_name}} Stats </li>
                 <li (click)="isSidebar = !isSidebar" [routerLink]="['/questions']" routerLinkActive="router-link-active"> Common Questions </li>
                 <li (click)="isSidebar = !isSidebar" [routerLink]="['/blog/corona-facts']" routerLinkActive="router-link-active"  class="b-none"> Corona Facts </li>
 

@@ -1,25 +1,160 @@
 .bg-d {
-    background-color: #282d37;
+  background-color: #282d37;
 }
 
-.wrap-country{
+.wrap-country {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+tbody {
+  color: #3b3b3b;
+}
+
+.modal-table{
+  max-height: 60vh;
+  max-width: 80vw;
+  margin: auto;
+}
+
+table {
+  max-width: 720px;
+  margin: auto;
+  text-transform: uppercase;
+  border: none !important;
+  thead {
+    border: none !important;
+    th.sticky {
+      top: 4px;
+      background: #f1f1f1;
+      text-align: center;
+    }
+    th {
+      vertical-align: bottom;
+      padding: 0.8rem;
+      border: none !important;
+      border-radius: 5px;
+      background: #f1f1f1;
+      padding: 0.5rem;
+      cursor: pointer;
+      color: #6d6d6d;
+      font-weight: 900;
+    }
+  }
+  tbody {
+    tr {
+      border: none !important;
+      td {
+        padding: 0.25rem;
+        border: none !important;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        text-align: right;
+        font-weight: 400;
+        color: #888888;
+        padding-top: 0.5rem;
+      }
+      td:first-child {
+        border: none !important;
+        text-align: left;
+        max-width: 7.5rem;
+        font-weight: 500;
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+
+table tbody td:first-child {
+  text-align: left;
+  max-width: 7.5rem;
+  word-wrap: break-word;
+}
+
+.white {
+  color: white !important;
+  line-height: 4px;
+  font-size: 10px;
+  margin: 0;
+}
+
+.indiaCards {
+  .card-box {
+    min-height: 200px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+  }
 }
 
-tbody{
-    color: #3b3b3b;
+.warning {
+  color: #a5a5a5 !important;
+  margin: auto;
 }
 
-th{
-    color: #444;
-}
-
-.white{
-    color: white !important;
-    line-height: 14px;
-    font-size: 10px;
+.date-wrapper {
+  text-align: center;
+  p {
     margin: 0;
+    color: rgb(40, 167, 69) !important;
+    font-weight: 600;
+  }
+}
+
+.heading-common {
+    text-transform: uppercase;
+    color: #343a40 !important;
+    margin: auto;
+    width: 75%;
+    text-align: center;
+}
+
+.deltas {
+  vertical-align: middle;
+  margin-right: 0.25rem;
+  font-size: 11px !important;
+  svg {
+    width: 9px;
+    height: 9px;
+    stroke-width: 3;
+    vertical-align: -0.25px;
+  }
+}
+
+
+.pointer{
+    cursor: pointer;
+}
+
+.state-btn{
+    background: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    color: #343a40;
+}
+
+.distictModal{
+    position: fixed;
+    top: 0;
+    background: white;
+    margin: 3rem 0;
+    padding: 0 1rem;
+    height: 100%;
+    .actual-data{
+        background: white;
+        border-radius: 10px;
+        position: relative;
+        margin-bottom: 3rem;
+    }
+    i{
+        position: absolute;
+        top: 0rem;
+        right: 0;
+        font-size: 2rem;
+        color: #ff5b5b;
+        padding: 1rem;
+    }
 }
